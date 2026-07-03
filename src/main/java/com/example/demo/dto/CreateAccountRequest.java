@@ -5,4 +5,5 @@ import lombok.Data;
 @Data
 public class CreateAccountRequest {
     private String accountOwnerName;
+    private double balance;
 }

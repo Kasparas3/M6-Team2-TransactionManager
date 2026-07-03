@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class Transaction {
 
     private long transactionId;
-    private String transactionAccount;
+    private long transactionAccountId;
     private String transactionType;
     private double transactionAmount;
     private LocalDateTime transactionCreatedAt;
