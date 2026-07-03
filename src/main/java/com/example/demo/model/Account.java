@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Account {
 
-    private long accountId;
+    private Long accountId;
     private String accountIban;
     private String accountOwnerName;
     private double accountBalance;

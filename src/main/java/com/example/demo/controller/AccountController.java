@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.AccountResponse;
 import com.example.demo.dto.CreateAccountRequest;
 import com.example.demo.model.Account;
 import com.example.demo.model.Transaction;
@@ -36,4 +35,5 @@ public class AccountController {
     public List<Transaction> getTransactions(@PathVariable long id) {
         return transactionService.getByAccountId(id);
     }
+
 }

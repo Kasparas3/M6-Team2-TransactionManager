@@ -21,9 +21,9 @@ public class TransactionService {
         return newTransaction;
     }
 
-    public List<Transaction> getByAccountId(long accountId) {
+    public List<Transaction> getByAccountId(Long accountId) {
         return transactions.stream()
-                .filter(t -> t.getTransactionAccountId() == accountId)
+                .filter(t -> t.getTransactionAccountId().equals(accountId))
                 .toList();
     }
 

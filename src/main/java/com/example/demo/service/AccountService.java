@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.AccountResponse;
 import com.example.demo.dto.CreateAccountRequest;
 import com.example.demo.model.Account;
 import org.springframework.stereotype.Service;
@@ -8,7 +7,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service
@@ -39,6 +37,11 @@ public class AccountService {
 
 
     private String generateIban() {
-        return "LT"+random.nextInt(10);
+        StringBuilder numberSequence = new StringBuilder();
+        for (int i = 0; i < 10; i++) {
+            numberSequence.append(String.valueOf(random.nextInt(10)));
+        }
+
+        return "LT" + numberSequence.toString();
     }
 }

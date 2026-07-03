@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class TransactionRequest {
-    private long fromAccountId;
-    private long toAccountId;
+    private Long fromAccountId;
+    private Long toAccountId;
     private double amount;
     private String note;
 }
