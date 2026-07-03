@@ -5,6 +5,7 @@ import com.example.demo.model.Account;
 import com.example.demo.model.Transaction;
 import com.example.demo.service.AccountService;
 import com.example.demo.service.TransactionService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +22,7 @@ public class TransactionController {
     }
 
     @PostMapping("/transfer")
-    public Transaction transfer(@RequestBody TransactionRequest request) {
+    public Transaction transfer(@Valid @RequestBody TransactionRequest request) {
         Account sender = accountService.getAccountById(request.getFromAccountId());
         Account receiver = accountService.getAccountById(request.getToAccountId());
         sender.setAccountBalance(sender.getAccountBalance() - request.getAmount());

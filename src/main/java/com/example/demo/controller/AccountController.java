@@ -5,6 +5,7 @@ import com.example.demo.model.Account;
 import com.example.demo.model.Transaction;
 import com.example.demo.service.AccountService;
 import com.example.demo.service.TransactionService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class AccountController {
     }
 
     @PostMapping("/account")
-    public Account createAccount(@RequestBody CreateAccountRequest request) {
+    public Account createAccount(@Valid @RequestBody CreateAccountRequest request) {
         return accountService.createAccount(request);
     }
 
