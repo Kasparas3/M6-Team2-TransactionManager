@@ -5,6 +5,7 @@ import com.example.demo.dto.CreateAccountRequest;
 import com.example.demo.dto.TransactionResponse;
 import com.example.demo.service.TransactionService;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class AccountController {
     }
 
     @PostMapping("/account")
-    public AccountResponse createAccount(@RequestBody CreateAccountRequest request) {
+    public AccountResponse createAccount(@Valid @RequestBody CreateAccountRequest request) {
         AccountResponse response = new AccountResponse();
         response.setAccountId(1);
         response.setAccountIban("PT50001234567890123456789");

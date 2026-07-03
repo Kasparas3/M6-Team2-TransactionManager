@@ -4,6 +4,7 @@ import com.example.demo.dto.TransactionResponse;
 import com.example.demo.dto.TransferRequest;
 import com.example.demo.service.TransactionService;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.time.LocalDateTime;
 
@@ -15,7 +16,7 @@ public class TransferController {
         this.transactionService = transactionService;
     }
     @PostMapping("/transfer")
-    public TransactionResponse transfer(@RequestBody TransferRequest request) {
+    public TransactionResponse transfer(@Valid @RequestBody TransferRequest request) {
         return transactionService.createTransfer(request);  // saves + returns
     }
 }
