@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.TransactionResponse;
-import com.example.demo.dto.TransferRequest;
+import com.example.demo.dto.TransactionRequest;
+import com.example.demo.model.Transaction;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -12,26 +12,29 @@ import java.util.concurrent.atomic.AtomicLong;
 @Service
 public class TransactionService {
 
-    private final List<TransactionResponse> transactions = new ArrayList<>();
+    private final List<Transaction> transactions = new ArrayList<>();
     private final AtomicLong nextId = new AtomicLong(1);
 
-    public TransactionResponse createTransfer(TransferRequest request) {
-        TransactionResponse tx = new TransactionResponse();
-        tx.setTransactionId(nextId.getAndIncrement());
-        tx.setTransactionAccount(String.valueOf(request.getFromAccountId()));
-        tx.setTransactionType("TRANSFER");
-        tx.setTransactionAmount(request.getAmount());
-        tx.setTransactionCreatedAt(LocalDateTime.now());
-        tx.setTransactionNote(request.getNote());
-
-        transactions.add(tx);  // ← SAVE IT
-        return tx;
+    public Transaction createTransaction(TransactionRequest request) {
+        Transaction newTransaction = buildTransaction(request);
+        transactions.add(newTransaction);
+        return newTransaction;
     }
 
-    public List<TransactionResponse> getByAccountId(long accountId) {
-        String accountIdStr = String.valueOf(accountId);
+    public List<Transaction> getByAccountId(Long accountId) {
         return transactions.stream()
-                .filter(t -> t.getTransactionAccount().equals(accountIdStr))
+                .filter(t -> t.getTransactionAccountId().equals(accountId))
                 .toList();
+    }
+
+    private Transaction buildTransaction(TransactionRequest request) {
+        Transaction transaction = new Transaction();
+        transaction.setTransactionId(nextId.getAndIncrement());
+        transaction.setTransactionAccountId(request.getFromAccountId());
+        transaction.setTransactionType("TRANSFER");
+        transaction.setTransactionAmount(request.getAmount());
+        transaction.setTransactionCreatedAt(LocalDateTime.now());
+        transaction.setTransactionNote(request.getNote());
+        return transaction;
     }
 }

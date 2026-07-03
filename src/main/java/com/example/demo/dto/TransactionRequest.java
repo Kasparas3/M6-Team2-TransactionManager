@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
 @Data
-public class TransferRequest {
+public class TransactionRequest {
 
     @NotNull(message = "From account ID is required")
     private Long fromAccountId;

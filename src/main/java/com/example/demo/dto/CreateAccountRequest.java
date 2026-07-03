@@ -8,4 +8,5 @@ public class CreateAccountRequest {
 
     @NotBlank(message = "Account owner name is required")
     private String accountOwnerName;
+    private double balance;
 }

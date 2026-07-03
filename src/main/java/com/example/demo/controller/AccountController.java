@@ -1,45 +1,40 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.AccountResponse;
 import com.example.demo.dto.CreateAccountRequest;
-import com.example.demo.dto.TransactionResponse;
+import com.example.demo.model.Account;
+import com.example.demo.model.Transaction;
+import com.example.demo.service.AccountService;
 import com.example.demo.service.TransactionService;
-import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 public class AccountController {
 
+
+    private final AccountService accountService;
     private final TransactionService transactionService;
 
-    public AccountController(TransactionService transactionService) {
+    public AccountController(TransactionService transactionService, AccountService accountService) {
         this.transactionService = transactionService;
+        this.accountService = accountService;
     }
 
     @PostMapping("/account")
-    public AccountResponse createAccount(@Valid @RequestBody CreateAccountRequest request) {
-        AccountResponse response = new AccountResponse();
-        response.setAccountId(1);
-        response.setAccountIban("PT50001234567890123456789");
-        response.setAccountOwnerName(request.getAccountOwnerName());
-        response.setAccountBalance(0.0);
-        return response;
+    public Account createAccount(@Valid @RequestBody CreateAccountRequest request) {
+        return accountService.createAccount(request);
     }
 
     @GetMapping("/account/{id}")
-    public AccountResponse getAccount(@PathVariable long id) {
-        AccountResponse response = new AccountResponse();
-        response.setAccountId(id);
-        response.setAccountIban("PT50001234567890123456789");
-        response.setAccountOwnerName("Alice");
-        response.setAccountBalance(100.0);
-        return response;
+    public Account getAccount(@PathVariable Long id) {
+        return accountService.getAccountById(id);
     }
 
     @GetMapping("/account/{id}/transactions")
-    public List<TransactionResponse> getTransactions(@PathVariable long id) {
-        return transactionService.getByAccountId(id);  // reads from same list
+    public List<Transaction> getTransactions(@PathVariable Long id) {
+        return transactionService.getByAccountId(id);
     }
+
 }
