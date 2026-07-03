@@ -28,12 +28,12 @@ public class AccountController {
     }
 
     @GetMapping("/account/{id}")
-    public Account getAccount(@PathVariable long id) {
+    public Account getAccount(@PathVariable Long id) {
         return accountService.getAccountById(id);
     }
 
     @GetMapping("/account/{id}/transactions")
-    public List<Transaction> getTransactions(@PathVariable long id) {
+    public List<Transaction> getTransactions(@PathVariable Long id) {
         return transactionService.getByAccountId(id);
     }
 

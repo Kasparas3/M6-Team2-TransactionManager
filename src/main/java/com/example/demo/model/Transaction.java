@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Transaction {
 
-    private long transactionId;
+    private Long transactionId;
     private Long transactionAccountId;
     private String transactionType;
     private double transactionAmount;
